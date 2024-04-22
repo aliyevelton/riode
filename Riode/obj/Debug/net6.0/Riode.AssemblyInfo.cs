@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Riode")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c706e2688b91415cddcf4872c93d45b86b36d506")]
 [assembly: System.Reflection.AssemblyProductAttribute("Riode")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Riode")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

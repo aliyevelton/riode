@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iZnLkWn8HlrOQSe01zBMRkz3pXK2F9qo6j0M4YO0wag=",
+  "Hash": "TsmEy6tSMxwJ/dVbFQ1TfBsVis3SdSextIxkpb3dFUM=",
   "Source": "Riode",
   "BasePath": "_content/Riode",
   "Mode": "Default",
@@ -59770,6 +59770,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\shop\\banner2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\wwwroot\\assets\\images\\shop\\no-image.webp",
+      "SourceId": "Riode",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\wwwroot\\",
+      "BasePath": "_content/Riode",
+      "RelativePath": "assets/images/shop/no-image.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\shop\\no-image.webp"
     },
     {
       "Identity": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\wwwroot\\assets\\images\\shop\\page-header-back.jpg",

@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Riode.Areas.Admin.Controllers
+namespace Riode.Areas.Admin.Controllers;
+[Area("Admin")]
+[Authorize(Roles = "Admin,Moderator")]
+public class CategoryController : Controller
 {
-	public class CategoryController : Controller
+	public IActionResult Index()
 	{
-		public IActionResult Index()
-		{
-			return View();
-		}
+		return View();
 	}
 }
+

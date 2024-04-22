@@ -12577,6 +12577,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\shop\\banner2.jpg"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\wwwroot\\assets\\images\\shop\\no-image.webp",
+      "PackagePath": "staticwebassets\\assets\\images\\shop\\no-image.webp"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\wwwroot\\assets\\images\\shop\\page-header-back.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\shop\\page-header-back.jpg"
     },

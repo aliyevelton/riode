@@ -14,7 +14,13 @@ namespace Riode.Controllers
         }
         public async Task<IActionResult> ProductDetail(int id)
         {
-            var products = await _context.Products.Where(p => p.IsStock).Include(p => p.Brand).Include(p => p.Category).Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id);
+            var products = await _context.Products
+                .Where(p => !p.IsDeleted)
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             if (products == null)
             {
 				return NotFound();
