@@ -1,7 +1,8 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Contact Us";
 }
+
+@model ContactComment
 
 @section Head {
     <head>
@@ -92,25 +93,33 @@
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-6 d-flex align-items-center mb-4">
                         <div class="w-100">
-                            <form class="pl-lg-2" action="#">
+                            <form class="pl-lg-2" method="POST">
                                 <h4 class="ls-m font-weight-bold">Let’s Connect</h4>
-                                <p>
-                                    Your email address will not be published. Required fields are
-                                    marked *
-                                </p>
+                                <div>
+                                    @if (TempData["Sent"] != null)
+                                    {
+                                        <div class="text-success mb-3">
+                                            @TempData["Sent"].ToString()
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p>Leave a comment</p>
+                                    }
+                                </div>
                                 <div class="row mb-2">
                                     <div class="col-12 mb-4">
-                                        <textarea class="form-control" required
+                                        <textarea class="form-control" asp-for="Comment"
                                                   placeholder="Comment*"></textarea>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <input class="form-control" type="text" placeholder="Name *" required>
+                                        <input class="form-control" placeholder="Name *" asp-for="Name">
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <input class="form-control" type="email" placeholder="Email *" required>
+                                        <input class="form-control" placeholder="Email *" asp-for="Email">
                                     </div>
                                 </div>
-                                <button class="btn btn-dark btn-rounded">
+                                <button type="submit" class="btn btn-dark btn-rounded">
                                     Post Comment<i class="d-icon-arrow-right"></i>
                                 </button>
                             </form>

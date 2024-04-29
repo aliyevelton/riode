@@ -110,10 +110,12 @@ public class ProductController : Controller
             Price = product.Price,
             Discount = product.Discount,
             Rating = product.Rating,
-            IsStock = true,
+            IsStock = product.IsStock,
             Images = productImages,
             Material = product.Material,
             Features = product.Features,
+            RecommendedUse = product.RecommendedUse,
+            IsDeleted = false,
             CategoryId = product.CategoryId,
             BrandId = product.BrandId,
             CreatedDate = DateTime.UtcNow,
@@ -128,7 +130,10 @@ public class ProductController : Controller
 
     public async Task<IActionResult> Detail(int id)
     {
-        var products = await _context.Products.AsNoTracking().Include(p => p.Category).Include(p => p.Brand).Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+        var products = await _context.Products.AsNoTracking()
+            .Include(p => p.Category)
+            .Include(p => p.Brand)
+            .Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
         if (products == null)
         {
             return NotFound();
@@ -228,8 +233,13 @@ public class ProductController : Controller
         if (product == null)
             return NotFound();
 
+
         List<ProductImage> ProductImages = new();
-        if (productUpdateViewModel.ProductImages != null)
+        foreach (var image in product.Images)
+        {
+            ProductImages.Add(image);
+        }
+        if (productUpdateViewModel.ProductImage != null)
         {
             foreach (var image in productUpdateViewModel.ProductImage)
             {
@@ -244,23 +254,6 @@ public class ProductController : Controller
                     ModelState.AddModelError("Image", "Add an image format");
                     return View();
                 }
-            }
-
-            foreach (var image in product.Images)
-            {
-                string basePath = Path.Combine(_webHostEnvironment.WebRootPath, "assets", "images", "shop", image.Image);
-                string path = Path.Combine(basePath, image.Image);
-
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
-
-            }
-
-
-            foreach (var image in productUpdateViewModel.ProductImage)
-            {
                 string fileName = $"{Guid.NewGuid()}-{image.FileName}";
                 string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets", "images", "shop", fileName);
                 using (FileStream stream = new FileStream(path, FileMode.Create))
@@ -288,13 +281,30 @@ public class ProductController : Controller
         product.Material = productUpdateViewModel.Material;
         product.IsStock = productUpdateViewModel.IsStock;
         product.RecommendedUse = productUpdateViewModel.RecommendedUse;
-        product.CategoryId = productUpdateViewModel.CategoryId;
-        product.BrandId = productUpdateViewModel.BrandId;
         product.UpdatedDate = DateTime.UtcNow;
         product.Images = ProductImages;
 
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> DeleteImage(int id)
+    {
+        var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.Id == id);
+
+        if (image == null)
+            return NotFound();
+
+        string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets", "images", "shop", image.Image);
+        if (System.IO.File.Exists(path))
+        {
+            System.IO.File.Delete(path);
+        }
+
+        _context.ProductImages.Remove(image);
+        await _context.SaveChangesAsync();
+
+        return Json(new { message = "Image has been deleted." });
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\Riode\\Riode\\Riode.csproj": {}
+    "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\Riode.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\Riode\\Riode\\Riode.csproj": {
+    "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\Riode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\Riode.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\Riode.csproj",
         "projectName": "Riode",
-        "projectPath": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\Riode.csproj",
+        "projectPath": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\Riode.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\Riode\\Riode\\obj\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -13,9 +13,9 @@ public class Product
     public DateTime UpdatedDate { get; set; }
     public bool IsStock { get; set; }
     public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public Category Category { get; set; } 
     public int BrandId { get; set; }
-    public Brand Brand { get; set; }
+    public Brand Brand { get; set; } 
     public ICollection<ProductImage>? Images { get; set; }
     public string Material { get; set; }
     public string Features { get; set; }

@@ -18,8 +18,9 @@ public class ProductCreateViewModel
     public bool IsStock { get; set; }
     public string Material { get; set; }
     public string Features { get; set; }
-    [Required]
+    public string RecommendedUse { get; set; }
     //public IFormFile Image { get; set; }
+    public bool IsDeleted { get; set; }
     public int CategoryId { get; set; }
     public int BrandId { get; set; }
     public ICollection<ProductImage>? ProductImages { get; set; }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Update";
+        ViewData["Title"] = "Update";
 }
 
 @model ProductUpdateViewModel
@@ -53,29 +53,56 @@
                             <input class="form-control" asp-for="RecommendedUse" placeholder="RecommendedUse">
                             <span asp-validation-for="RecommendedUse" class="text-danger"></span>
                         </div>
-                        @foreach (ProductImage image in Model.ProductImages)
+                        <label for="exampleInputPassword1">Product Images</label><br>
+                        <p class="text-danger">Attention: There needs to be at least one image of product!</p>
+                        @foreach (var image in Model.ProductImages)
                         {
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Poster Image</label>
-                                <input type="file" class="form-control" asp-for="ProductImage" placeholder="Image">
-                                <span asp-validation-for="ProductImage" class="text-danger"></span>
+                                <img class="p-image" src="~/assets/images/shop/@image.Image"
+                                     alt="@Model.Name" width="300" height="200"><br>
                             </div>
+                            <a class="btn btn-danger deleteImageBtn" asp-action="DeleteImage" asp-route-id="@image.Id">
+                                <i class="fa-solid fa-trash"></i> Delete image
+                            </a> <br>
+
+                            <br>
                         }
+                        <div class="form-group" id="imageInputs">
+                            <label for="Image">Add new image</label>
+                            <span asp-validation-for="ProductImage" class="text-danger"></span>
+                            <input id="imageInput" class="form-control product-image-input" asp-for="ProductImage" placeholder="Image" accept="image/*">
+                        </div>
+                        <button type="button" id="addImageUpdate" class="btn-success">Add Image</button><br><br>
+
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Categories</label>
-                            <select class="form-control" id="exampleFormControlSelect2" name="categoryId">
+                            <select class="form-control" id="exampleFormControlSelect2" disabled>
                                 @foreach (Category category in ViewBag.Categories)
                                 {
-                                    <option value="@category.Id">@category.Name</option>
+                                    @if(category.Id == Model.CategoryId)
+                                    {
+                                        <option value="@category.Id" selected>@category.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.Id">@category.Name</option>                                      
+                                    }
                                 }
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Brands</label>
-                            <select class="form-control" id="exampleFormControlSelect2" name="brandId">
+                            <select class="form-control" id="exampleFormControlSelect2" disabled>
                                 @foreach (Brand brand in ViewBag.Brands)
                                 {
-                                    <option value="@brand.Id">@brand.Name</option>
+                                    @if (brand.Id == Model.BrandId)
+                                    {
+                                        <option value="@Model.BrandId" selected>@brand.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.BrandId">@brand.Name</option>
+                                    }
                                 }
                             </select>
                         </div>

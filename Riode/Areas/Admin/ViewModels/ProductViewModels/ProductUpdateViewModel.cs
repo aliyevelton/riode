@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Riode.Areas.Admin.ViewModels.ProductViewModels;
 public class ProductUpdateViewModel
 {
+    public int? Id { get; set; }
     [Required]
     public string Name { get; set; } = null!;
     [Required]
     public double Price { get; set; }
-    [Required]
     public double? OldPrice { get; set; }
     [Range(0, 5, ErrorMessage = "Rating must be between 0 and 5")]
     public int Rating { get; set; }

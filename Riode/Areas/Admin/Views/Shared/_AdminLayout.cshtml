@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Riode Admin</title>
     <!-- plugins:css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/adminAssets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/adminAssets/vendors/base/vendor.bundle.base.css">
     <!-- endinject -->
@@ -173,7 +174,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Products">
+                        <a class="nav-link" asp-controller="Product">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Products</span>
                         </a>
@@ -185,15 +186,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../pages/tables/basic-table.html">
+                        <a class="nav-link" asp-controller="Category">
                             <i class="mdi mdi-grid-large menu-icon"></i>
-                            <span class="menu-title">Tables</span>
+                            <span class="menu-title">Category</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../pages/icons/mdi.html">
+                        <a class="nav-link" asp-controller="Brand">
                             <i class="mdi mdi-emoticon menu-icon"></i>
-                            <span class="menu-title">Icons</span>
+                            <span class="menu-title">Brand</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -250,6 +251,8 @@
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="~/adminAssets/js/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/backend/js/admin-script.js"></script>
     <!-- End custom js for this page-->
 </body>
 
