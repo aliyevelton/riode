@@ -48,78 +48,6 @@ window.Riode = {};
                 columnWidth: '.grid-space'
             }
         },
-        minipopup: {
-            // info
-            message: '',
-            productClass: '', // ' product-cart', ' product-list-sm'
-            imageSrc: '',
-            imageLink: '#',
-            name: '',
-            nameLink: '#', // 'product.html',
-            price: '',
-            count: null,
-            rating: null,
-            actionTemplate: '',
-            isPurchased: false,
-
-            // option
-            delay: 4000, // milliseconds
-            space: 20,
-
-            // template
-            priceTemplate: '<span class="product-price">{{price}}</span>',
-            ratingTemplate: '<div class="ratings-container"><div class="ratings-full"><span class="ratings" style="width:{{rating}}"></span><span class="tooltiptext tooltip-top"></span></div></div>',
-            priceQuantityTemplate: '<div class="price-box"><span class="product-quantity">{{count}}</span><span class="product-price">{{price}}</span></div>',
-            purchasedTemplate: '<span class="purchased-time">12 MINUTES AGO</span>',
-
-            template: '<div class="minipopup-box"><p class="minipopup-title">{{message}}</p>' +
-                '<div class="product product-purchased {{productClass}} mb-0">' +
-                '<figure class="product-media"><a href="{{imageLink}}"><img src="{{imageSrc}}" alt="product" width="90" height="90"></a></figure>' +
-                '<div class="product-detail">' +
-                '<a href="{{nameLink}}" class="product-name">{{name}}</a>' +
-                '{{detailTemplate}}' +
-                '</div>' +
-                '</div>' +
-                '{{actionTemplate}}' +
-                '</div>',
-        },
-        popup: {
-            removalDelay: 350,
-            callbacks: {
-                open: function () {
-                    $( 'html' ).css( 'overflow-y', 'hidden' );
-                    $( 'body' ).css( 'overflow-x', 'visible' );
-                    $( '.mfp-wrap' ).css( 'overflow', 'hidden auto' );
-                    $( '.sticky-header.fixed' ).css( 'padding-right', window.innerWidth - document.body.clientWidth );
-                },
-                close: function () {
-                    $( 'html' ).css( 'overflow-y', '' );
-                    $( 'body' ).css( 'overflow-x', 'hidden' );
-                    $( '.mfp-wrap' ).css( 'overflow', '' );
-                    $( '.sticky-header.fixed' ).css( 'padding-right', '' );
-                }
-            }
-        },
-        popupPresets: {
-            login: {
-                type: 'ajax',
-                mainClass: "mfp-login mfp-fade",
-                tLoading: '',
-                preloader: false
-            },
-            video: {
-                type: 'iframe',
-                mainClass: "mfp-fade",
-                preloader: false,
-                closeBtnInside: false
-            },
-            quickview: {
-                type: 'ajax',
-                mainClass: "mfp-product mfp-fade",
-                tLoading: '',
-                preloader: false
-            }
-        },
         slider: {
             responsiveClass: true,
             navText: [ '<i class="d-icon-angle-left">', '<i class="d-icon-angle-right">' ],
@@ -1185,21 +1113,6 @@ window.Riode = {};
 	/**
 	 * @function initPurchasedMinipopup
 	 */
-    Riode.initPurchasedMinipopup = function () {
-        setInterval( function () {
-            Riode.Minipopup.open( {
-                message: 'Someone Purchased',
-                productClass: 'product-cart',
-                name: 'Daisy Shoes Sonia by Sonia-Blue',
-                nameLink: 'product.html',
-                imageSrc: 'images/cart/product-1.jpg',
-                isPurchased: true
-            }, function ( $box ) {
-                Riode.ratingTooltip( $box[ 0 ] );
-            } );
-        }, 60000 );
-    }
-
 	/**
 	 * @function initScrollTopButton
 	 */
@@ -1620,35 +1533,6 @@ window.Riode = {};
             self.$clean.on( 'click', function ( e ) {
                 e.preventDefault();
                 self.variationClean( true );
-            } );
-        }
-
-        var initCartAction = function ( self ) {
-
-            // Product Single's Add To Cart Button
-            self.$wrapper.on( 'click', '.btn-cart', function ( e ) {
-                e.preventDefault();
-
-                var $product = self.$wrapper,
-                    name = $product.find( '.product-name' ).text();
-
-                // minipopup if only quickview or home pages
-                if (
-                    $product.closest( '.product-popup' ).length ||
-                    document.body.classList.contains( 'home' )
-                ) {
-                    Riode.Minipopup.open( {
-                        message: 'Successfully Added',
-                        productClass: ' product-cart',
-                        name: name,
-                        nameLink: $product.find( '.product-name > a' ).attr( 'href' ),
-                        imageSrc: $product.find( '.product-image img' ).eq( 0 ).attr( 'src' ),
-                        imageLink: $product.find( '.product-name > a' ).attr( 'href' ),
-                        price: $product.find( '.product-variation-price' ).length > 0 ? $product.find( '.product-variation-price' ).children( 'span' ).html() : $product.find('.product-price .price').html(),
-                        count: $product.find( '.quantity' ).val(),
-                        actionTemplate: '<div class="action-group d-flex mt-3"><a href="cart.html" class="btn btn-sm btn-outline btn-primary btn-rounded mr-2">View Cart</a><a href="checkout.html" class="btn btn-sm btn-primary btn-rounded">Check Out</a></div>'
-                    } );
-                }
             } );
         }
 
@@ -2443,137 +2327,7 @@ window.Riode = {};
 	/**
 	 * @class MiniPopup
 	 */
-    Riode.Minipopup = ( function () {
-        var $area,
-            offset = 0,
-            boxes = [],
-            isPaused = false,
-            timers = [],
-            timerId = false,
-            timerInterval = 200,
-            timerClock = function () {
-                if ( isPaused ) {
-                    return;
-                }
-                for ( var i = 0; i < timers.length; ++i ) {
-                    ( timers[ i ] -= timerInterval ) <= 0 && this.close( i-- );
-                }
-            }
-
-        return {
-            init: function () {
-                // init area
-                var area = document.createElement( 'div' );
-                area.className = "minipopup-area";
-                Riode.byClass( 'page-wrapper' )[ 0 ].appendChild( area );
-
-                $area = $( area );
-                $area.on( 'click', '.btn-close', function ( e ) {
-                    self.close( $( this ).closest( '.minipopup-box' ).index() );
-                } );
-
-                // bind methods
-                this.close = this.close.bind( this );
-                timerClock = timerClock.bind( this );
-            },
-
-            open: function ( options, callback ) {
-                var self = this,
-                    settings = $.extend( true, {}, Riode.defaults.minipopup, options ),
-                    $box;
-                if ( !settings.isPurchased ) {
-                    settings.detailTemplate = Riode.parseTemplate(
-                        ( null != settings.count ? settings.priceQuantityTemplate : settings.priceTemplate ),
-                        settings
-                    )
-                } else {
-                    settings.detailTemplate = Riode.parseTemplate(
-                        settings.purchasedTemplate,
-                        settings
-                    )
-                }
-                if ( null != settings.rating ) {
-                    settings.detailTemplate += Riode.parseTemplate( settings.ratingTemplate, settings );
-                }
-                $box = $( Riode.parseTemplate( settings.template, settings ) );
-
-                self.space = settings.space;
-
-                // open
-                $box
-                    .appendTo( $area )
-                    .css( 'top', - offset )
-                    .find( "img" )[ 0 ]
-                    .onload = function () {
-                        offset += $box[ 0 ].offsetHeight + self.space;
-
-                        $box.addClass( 'show' );
-                        if ( $box.offset().top - window.pageYOffset < 0 ) {
-                            self.close();
-                            $box.css( 'top', - offset + $box[ 0 ].offsetHeight + self.space );
-                        }
-                        $box.on( 'mouseenter', function () { self.pause() } )
-                            .on( 'mouseleave', function () { self.resume() } )
-                            .on( 'touchstart', function ( e ) { self.pause(); e.stopPropagation(); } )
-                            .on( 'mousedown', function () {
-                                $( this ).addClass( 'focus' );
-                            } )
-                            .on( 'mouseup', function () {
-                                self.close( $( this ).index() );
-                            } );
-                        Riode.$body.on( 'touchstart', function () {
-                            self.resume();
-                        } );
-
-                        boxes.push( $box );
-                        timers.push( settings.delay );
-
-                        ( timers.length > 1 ) || (
-                            timerId = setInterval( timerClock, timerInterval )
-                        )
-
-                        callback && callback( $box );
-                    };
-            },
-
-            close: function ( indexToClose ) {
-                var self = this,
-                    index = ( 'undefined' === typeof indexToClose ) ? 0 : indexToClose,
-                    $box = boxes.splice( index, 1 )[ 0 ];
-
-                // remove timer
-                timers.splice( index, 1 )[ 0 ];
-
-                // remove box
-                offset -= $box[ 0 ].offsetHeight + self.space;
-                $box.removeClass( 'show' );
-                setTimeout( function () {
-                    $box.remove();
-                }, 300 );
-
-                // slide down other boxes
-                boxes.forEach( function ( $box, i ) {
-                    if ( i >= index && $box.hasClass( 'show' ) ) {
-                        $box.stop( true, true ).animate( {
-                            top: parseInt( $box.css( 'top' ) ) + $box[ 0 ].offsetHeight + 20
-                        }, 600, 'easeOutQuint' );
-                    }
-                } );
-
-                // clear timer
-                boxes.length || clearTimeout( timerId );
-            },
-
-            pause: function () {
-                isPaused = true;
-            },
-
-            resume: function () {
-                isPaused = false;
-            }
-        }
-    } )();
-
+ 
 	/**
 	 * @function floatSVG
 	 * @param {string|jQuery} selector 
@@ -2865,43 +2619,6 @@ window.Riode = {};
                 }, 'quickview' );
             } );
         },
-        initProductsCartAction: function () {
-            Riode.$body
-                // Cart dropdown is offcanvas type
-                .on( 'click', '.cart-offcanvas .cart-toggle', function ( e ) {
-                    $( '.cart-dropdown' ).addClass( 'opened' );
-                    e.preventDefault();
-                } )
-                .on( 'click', '.cart-offcanvas .cart-header .btn-close', function ( e ) {
-                    $( '.cart-dropdown' ).removeClass( 'opened' );
-                    e.preventDefault();
-                } )
-                .on( 'click', '.cart-offcanvas .cart-overlay', function ( e ) {
-                    $( '.cart-dropdown' ).removeClass( 'opened' );
-                    e.preventDefault();
-                } )
-
-                // Add to cart in products
-                .on( 'click', '.product:not(.product-variable) .btn-product-icon.btn-cart, .product:not(.product-variable) .btn-product.btn-cart', function ( e ) {
-                    e.preventDefault();
-
-                    var $product = $( this ).closest( '.product' );
-
-                    // if not product single, then open minipopup
-                    $product.hasClass( 'product-single' ) ||
-                        Riode.Minipopup.open( {
-                            message: 'Successfully Added',
-                            productClass: ' product-cart',
-                            name: $product.find( '.product-name' ).text(),
-                            nameLink: $product.find( '.product-name > a' ).attr( 'href' ),
-                            imageSrc: $product.find( '.product-media img' ).attr( 'src' ),
-                            imageLink: $product.find( '.product-name > a' ).attr( 'href' ),
-                            price: $product.find( '.product-price .new-price, .product-price .price' ).html(),
-                            count: $product.find( '.quantity' ).length > 0 ? $product.find( '.quantity' ).val() : 1,
-                            actionTemplate: '<div class="action-group d-flex"><a href="cart.html" class="btn btn-sm btn-outline btn-primary btn-rounded">View Cart</a><a href="checkout.html" class="btn btn-sm btn-primary btn-rounded">Check Out</a></div>'
-                        } );
-                } );
-        },
         initProductsLoad: function () {
             $( '.btn-load' ).on( 'click', function ( e ) {
                 var $this = $( this ),
@@ -3021,8 +2738,7 @@ window.Riode = {};
 
     // Initialize Method after document has been loaded
     Riode.init = function () {
-        Riode.appearAnimate( '.appear-animate' );                               // Runs appear animations
-        Riode.Minipopup.init();                                                 // Initialize minipopup
+        Riode.appearAnimate( '.appear-animate' );                               // Initialize minipopup
         Riode.Shop.init();                                                      // Initialize shop
         Riode.initProductSinglePage();                                          // Initialize single product page
         Riode.slider( '.owl-carousel' );                                        // Initialize slider
@@ -3045,8 +2761,7 @@ window.Riode = {};
         Riode.Menu.init();                                                      // Initialize menus
         Riode.initZoom();                                                       // Initialize zoom
         Riode.initNavFilter( '.nav-filters .nav-filter' );                      // Initialize navigation filters for blog, products
-        Riode.initPopups();                                                     // Initialize popups: login, register, play video, newsletter popup
-        Riode.initPurchasedMinipopup();                                         // Initialize minipopup for purchased event
+        Riode.initPopups();                                                  // Initialize minipopup for purchased event
         Riode.initScrollTopButton();                                            // Initialize scroll top button.
         Riode.floatSVG( '.float-svg' );						                    // Floating SVG
         Riode.initShowVendorSearch( '.toolbox .form-toggle-btn' );              // Initialize show vendor search form

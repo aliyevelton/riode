@@ -3,6 +3,7 @@
 namespace Riode.ViewModels;
 public class ProductDetailViewModel
 {
+	public int Id { get; set; }
 	public string Name { get; set; }
 	public string Description { get; set; }
 	public double Price { get; set; }
@@ -17,4 +18,5 @@ public class ProductDetailViewModel
 	public string BrandName { get; set; }
 	public string? RecommendedUse { get; set; }
 	public ICollection<ProductImage> Images { get; set; }
+	public ICollection<Review> Reviews { get; set; }
 }

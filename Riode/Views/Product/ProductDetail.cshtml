@@ -1,4 +1,4 @@
-﻿@model ProductDetailViewModel
+﻿@model ProductDetailPageViewModel
 
 @{
     ViewData["Title"] = "Product Detail";
@@ -54,18 +54,18 @@
 					<div class="product-gallery pg-vertical sticky-sidebar"
 						 data-sticky-options="{'minWidth': 767}">
 						<div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
-							@foreach (var image in Model.Images)
+							@foreach (var image in Model.ProductDetail.Images)
                             {
 								<figure class="product-image">
 									<img src="~/assets/images/shop/@image.Image"
 										 data-zoom-image="assets/images/shop/@image.Image"
-										 alt="@Model.Name" width="800" height="900">
+										 alt="@Model.ProductDetail.Name" width="800" height="900">
 								</figure>
                             }
 						</div>
 						<div class="product-thumbs-wrap">
 							<div class="product-thumbs">
-								@foreach(var image in Model.Images)
+								@foreach(var image in Model.ProductDetail.Images)
                                 {
 									<div class="product-thumb active">
 										<img src="~/assets/images/shop/@image.Image" alt="product thumbnail"
@@ -114,21 +114,33 @@
 							</ul>
 						</div>
 
-						<h1 class="product-name">@Model.Name</h1>
+						<h1 class="product-name">@Model.ProductDetail.Name</h1>
 						<div class="product-meta">
 							SKU: <span class="product-sku">12345670</span>
-							BRAND: <span class="product-brand">@Model.BrandName</span>
+							BRAND: <span class="product-brand">@Model.ProductDetail.BrandName</span>
 						</div>
-						<div class="product-price">$@Model.Price</div>
+						<div class="product-price">$@Model.ProductDetail.Price</div>
 						<div class="ratings-container">
 							<div class="ratings-full">
-								<span class="ratings" style="width:80%"></span>
-								<span class="tooltiptext tooltip-top"></span>
+								@{
+									double totalRating = 0;
+									int reviewCount = 0;
+
+									foreach (var review in Model.ProductDetail.Reviews.Where(r => r.ProductId == Model.ProductDetail.Id).ToList())
+									{
+										totalRating += review.Rating;
+										reviewCount++;
+									}
+									
+									double averageRating = reviewCount > 0 ? totalRating / reviewCount : 0;
+								}
+								<span class="ratings" style="width:@(averageRating * 20)%"></span>
+								<span class="tooltiptext tooltip-top">@averageRating</span>
 							</div>
-							<a href="#product-tab-reviews" class="link-to-tab rating-reviews">( 11 reviews )</a>
+							<a href="#product-tab-reviews" class="link-to-tab rating-reviews">( @Model.ProductDetail.Reviews.Where(r => r.ProductId == Model.ProductDetail.Id).ToList().Count reviews )</a>
 						</div>
 						<p class="product-short-desc">
-							@Model.Description
+							@Model.ProductDetail.Description
 						</p>
 						<div class="product-form product-variations product-color">
 							<label>Color:</label>
@@ -161,7 +173,7 @@
 							</div>
 						</div>
 						<div class="product-variation-price">
-							<span>@Model.Price</span>
+							<span>@Model.ProductDetail.Price</span>
 						</div>
 
 						<hr class="product-divider">
@@ -215,7 +227,7 @@
 						<a class="nav-link" href="#product-tab-size-guide">Size Guide</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#product-tab-reviews">Reviews (2)</a>
+						<a class="nav-link" href="#product-tab-reviews">Reviews (@Model.ProductDetail.Reviews.Where(r => r.ProductId == Model.ProductDetail.Id).ToList().Count)</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -224,7 +236,7 @@
 							<div class="col-md-6">
 								<h5 class="description-title mb-4 font-weight-semi-bold ls-m">Features</h5>
 								<p class="mb-2">
-									@Model.Features
+									@Model.ProductDetail.Features
 								</p>
 								<h5 class="description-title mb-3 font-weight-semi-bold ls-m">
 									Specifications
@@ -233,7 +245,7 @@
 									<tbody>
 										<tr>
 											<th class="font-weight-semi-bold text-dark pl-0">Material</th>
-											<td class="pl-4">@Model.Material</td>
+											<td class="pl-4">@Model.ProductDetail.Material</td>
 										</tr>
 										<tr>
 											<th class="font-weight-semi-bold text-dark pl-0">Claimed Size</th>
@@ -244,7 +256,7 @@
 												Recommended Use
 											</th>
 											<td class="pl-4">
-												@Model.RecommendedUse
+												@Model.ProductDetail.RecommendedUse
 											</td>
 										</tr>
 										<tr>
@@ -300,15 +312,7 @@
 						<ul class="list-none">
 							<li>
 								<label>Brands:</label>
-								<p>@Model.BrandName</p>
-							</li>
-							<li>
-								<label>Color:</label>
-								<p>Blue, Brown</p>
-							</li>
-							<li>
-								<label>Size:</label>
-								<p>Large, Medium, Small</p>
+								<p>@Model.ProductDetail.BrandName</p>
 							</li>
 						</ul>
 					</div>
@@ -371,82 +375,45 @@
 					<div class="tab-pane " id="product-tab-reviews">
 						<div class="comments mb-8 pt-2 pb-2 border-no">
 							<ul>
-								<li>
-									<div class="comment">
-										<figure class="comment-media">
-											<a href="#">
-												<img src="~/assets/images/blog/comments/1.jpg" alt="avatar">
-											</a>
-										</figure>
-										<div class="comment-body">
-											<div class="comment-rating ratings-container mb-0">
-												<div class="ratings-full">
-													<span class="ratings" style="width:80%"></span>
-													<span class="tooltiptext tooltip-top">4.00</span>
+								@foreach(var review in Model.ProductDetail.Reviews.Where(r => r.ProductId == Model.ProductDetail.Id).ToList())
+								{
+									<li>
+										<div class="comment">
+											<figure class="comment-media">
+												<a href="#">
+													@if(review.User.Photo != null)
+                                                    {
+														<img src="~/assets/images/user-profile/@review.User.Photo" alt="avatar">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/assets/images/shop/no-image.webp" alt="avatar">
+                                                    })
+												</a>
+											</figure>
+											<div class="comment-body">
+												<div class="comment-rating ratings-container mb-0">
+													<div class="ratings-full">
+														<span class="ratings" style="width: @(review.Rating * 20)%"></span>
+														<span class="tooltiptext tooltip-top">@review.Rating</span>
+													</div>
+												</div>
+												<div class="comment-user">
+													<span class="comment-date text-body">
+														@review.CreatedDate.ToString("dd MMMM yyyy, HH:mm")
+													</span>
+													<h4><a href="#">@review.User.FullName</a></h4>
+												</div>
+
+												<div class="comment-content">
+													<p>
+														@review.Comment
+													</p>
 												</div>
 											</div>
-											<div class="comment-user">
-												<span class="comment-date text-body">
-													September 22, 2020 at 9:42
-													pm
-												</span>
-												<h4><a href="#">John Doe</a></h4>
-											</div>
-
-											<div class="comment-content">
-												<p>
-													Sed pretium, ligula sollicitudin laoreet viverra, tortor
-													libero sodales leo,
-													eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo.
-													Suspendisse potenti.
-													Sed egestas, ante et vulputate volutpat, eros pede semper
-													est, vitae luctus metus libero eu augue.
-												</p>
-											</div>
 										</div>
-									</div>
-								</li>
-								<li>
-									<div class="comment">
-										<figure class="comment-media">
-											<a href="#">
-												<img src="~/assets/images/blog/comments/2.jpg" alt="avatar">
-											</a>
-										</figure>
-
-										<div class="comment-body">
-											<div class="comment-rating ratings-container mb-0">
-												<div class="ratings-full">
-													<span class="ratings" style="width:80%"></span>
-													<span class="tooltiptext tooltip-top">4.00</span>
-												</div>
-											</div>
-											<div class="comment-user">
-												<span class="comment-date text-body">
-													September 22, 2020 at 9:42
-													pm
-												</span>
-												<h4><a href="#">John Doe</a></h4>
-											</div>
-
-											<div class="comment-content">
-												<p>
-													Sed pretium, ligula sollicitudin laoreet viverra, tortor
-													libero sodales leo, eget blandit nunc tortor eu nibh. Nullam
-													mollis.
-													Ut justo. Suspendisse potenti. Sed egestas, ante et
-													vulputate volutpat,
-													eros pede semper est, vitae luctus metus libero eu augue.
-													Morbi purus libero,
-													faucibus adipiscing, commodo quis, avida id, est. Sed
-													lectus. Praesent elementum
-													hendrerit tortor. Sed semper lorem at felis. Vestibulum
-													volutpat.
-												</p>
-											</div>
-										</div>
-									</div>
-								</li>
+									</li>
+								}
 							</ul>
 						</div>
 						<!-- End Comments -->
@@ -458,11 +425,11 @@
 							<div class="rating-form">
 								<label for="rating" class="text-dark">Your rating * </label>
 								<span class="rating-stars selected">
-									<a class="star-1" href="#">1</a>
-									<a class="star-2" href="#">2</a>
-									<a class="star-3" href="#">3</a>
-									<a class="star-4 active" href="#">4</a>
-									<a class="star-5" href="#">5</a>
+									<a class="star-1" data-value="1">1</a>
+									<a class="star-2" data-value="2">2</a>
+									<a class="star-3" data-value="3">3</a>
+									<a class="star-4 active" data-value="4">4</a>
+									<a class="star-5" data-value="5">5</a>
 								</span>
 
 								<select name="rating" id="rating" required="" style="display: none;">
@@ -474,27 +441,13 @@
 									<option value="1">Very poor</option>
 								</select>
 							</div>
-							<form action="#">
+							<form method="post" asp-action="AddReview">
+								<input type="hidden" asp-for="ReviewForm.Rating" id="rating" value="4" />
 								<textarea id="reply-message" cols="30" rows="6" class="form-control mb-4"
-										  placeholder="Comment *" required></textarea>
+										  placeholder="Comment *" asp-for="ReviewForm.Comment"></textarea>
 								<div class="row">
-									<div class="col-md-6 mb-5">
-										<input type="text" class="form-control" id="reply-name"
-											   name="reply-name" placeholder="Name *" required />
-									</div>
-									<div class="col-md-6 mb-5">
-										<input type="email" class="form-control" id="reply-email"
-											   name="reply-email" placeholder="Email *" required />
-									</div>
-								</div>
-								<div class="form-checkbox mb-4">
-									<input type="checkbox" class="custom-checkbox" id="signin-remember"
-										   name="signin-remember" />
-									<label class="form-control-label" for="signin-remember">
-										Save my name, email, and website in this browser for the next time I
-										comment.
-									</label>
-								</div>
+								<input type="hidden" name="productId" value="@Model.ProductDetail.Id" />
+								<input type="hidden" name="userId" value="@User.Identity.Name" />
 								<button type="submit" class="btn btn-primary btn-rounded">
 									Submit<i class="d-icon-arrow-right"></i>
 								</button>
@@ -764,4 +717,20 @@
 
 	<!-- Main JS File -->
 	<script src="~/assets/js/main.min.js"></script>
+	<script>
+		const stars = document.querySelectorAll('.rating-stars a');
+		stars.forEach(star => {
+			star.addEventListener('click', function (e) {
+				e.preventDefault();
+
+				stars.forEach(s => s.classList.remove('active'));
+				this.classList.add('active');
+
+				document.querySelector('#rating').value = this.getAttribute('data-value');
+				console.log(document.querySelector('#rating'))
+				let selectedStars = this.getAttribute('data-value');
+				console.log('Selected stars count:', selectedStars);
+			});
+		});
+	</script>
 }

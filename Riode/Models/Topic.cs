@@ -6,6 +6,4 @@ public class Topic
     public string Name { get; set; } = null!;
 
     public ICollection<BlogTopic> BlogTopic { get; set; } = null!;
-    public ICollection<Blog> Blog { get; set; } = null!;
-
 }

@@ -10,15 +10,9 @@
         public string FamousWord { get; set; } = null!;
         public string AuthorComment { get; set; } = null!;
         public bool isDeleted { get; set; }
-        public ICollection<ProductImage> Images { get; set; } = null!;
-        public ICollection<BlogTopic> BlogTopic { get; set; } = null!;
-        public List<Topic> Topic { get; set; } = null!;
+        public ICollection<BlogImage> Images { get; set; } = null!;
+        public ICollection<BlogTopic> BlogTopics { get; set; } = null!;
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-
-
-
-
-
     }
 }

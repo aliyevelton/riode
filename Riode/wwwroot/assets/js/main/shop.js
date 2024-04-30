@@ -135,7 +135,7 @@
     var initProductsCartAction = function () {
         // Add to cart in products
         Riode.$body.on('click', '.btn-product-icon.btn-cart, .btn-product.btn-cart', function (e) {
-            e.preventDefault();
+            
 
             var $product = $(this).closest('.product');
 

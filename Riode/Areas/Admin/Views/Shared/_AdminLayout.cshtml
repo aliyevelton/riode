@@ -150,7 +150,7 @@
                                 <i class="mdi mdi-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="@Url.Action("Logout", "Auth", new { area = "" })">
                                 <i class="mdi mdi-logout text-primary"></i>
                                 Logout
                             </a>
@@ -180,7 +180,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Blog">
+                        <a class="nav-link" asp-controller="Blogs">
                             <i class="mdi mdi-chart-pie menu-icon"></i>
                             <span class="menu-title">Blogs</span>
                         </a>
@@ -198,7 +198,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" asp-controller="Users">
                             <i class="mdi mdi-account menu-icon"></i>
                             <span class="menu-title">User Pages</span>
                             <i class="menu-arrow"></i>

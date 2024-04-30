@@ -1001,6 +1001,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\categories\\4b70c507-0f3f-4cbc-8f01-0987bb99f5dd-porsche-logo.webp"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\categories\\7e4c70b7-594a-4e9c-8bc2-a183bb926911-71LB-jVyW8L.webp",
+      "PackagePath": "staticwebassets\\assets\\images\\categories\\7e4c70b7-594a-4e9c-8bc2-a183bb926911-71LB-jVyW8L.webp"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\categories\\babycare.svg",
       "PackagePath": "staticwebassets\\assets\\images\\categories\\babycare.svg"
     },
@@ -12605,6 +12609,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\shop\\4a024728-4266-417a-baa6-edd351ca47b3-kamal.webp"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\shop\\4ae1fc0e-5ecc-4603-b38d-2515c08f0fd1-kamal.webp",
+      "PackagePath": "staticwebassets\\assets\\images\\shop\\4ae1fc0e-5ecc-4603-b38d-2515c08f0fd1-kamal.webp"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\shop\\5.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\shop\\5.jpg"
     },
@@ -12655,6 +12663,10 @@
     {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\shop\\9.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\shop\\9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\shop\\91700d19-097f-4532-bf27-f58693e50f05-porsche-2.webp",
+      "PackagePath": "staticwebassets\\assets\\images\\shop\\91700d19-097f-4532-bf27-f58693e50f05-porsche-2.webp"
     },
     {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\shop\\92329409-43b6-4c7f-9f48-93b38365fa00-kamal.webp",
@@ -12833,6 +12845,30 @@
       "PackagePath": "staticwebassets\\assets\\images\\subpages\\team4.jpg"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\user-profile\\no-image.webp",
+      "PackagePath": "staticwebassets\\assets\\images\\user-profile\\no-image.webp"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\images\\vendor\\avatar\\1.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\vendor\\avatar\\1.jpg"
     },
@@ -12937,16 +12973,8 @@
       "PackagePath": "staticwebassets\\assets\\js\\main\\easing.js"
     },
     {
-      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\js\\main\\minipopup.js",
-      "PackagePath": "staticwebassets\\assets\\js\\main\\minipopup.js"
-    },
-    {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\js\\main\\plugins.js",
       "PackagePath": "staticwebassets\\assets\\js\\main\\plugins.js"
-    },
-    {
-      "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\js\\main\\popup.js",
-      "PackagePath": "staticwebassets\\assets\\js\\main\\popup.js"
     },
     {
       "Id": "C:\\Users\\User\\source\\repos\\salam\\riode\\Riode\\wwwroot\\assets\\js\\main\\product-single-page.js",

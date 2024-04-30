@@ -287,7 +287,7 @@
                     <div class="product text-center">
                         <figure class="product-media">
                             <a href="product.html">
-                                <img src="~/assets/images/demos/demo1/@Model.ProductImages.ToList().FirstOrDefault(i => i.ProductId == product.Id).Image" alt="Blue Pinafore Denim Dress"
+                                <img src="~/assets/images/shop/@Model.ProductImages.ToList().FirstOrDefault(i => i.ProductId == product.Id).Image" alt="Blue Pinafore Denim Dress"
                                      width="280" height="315" style="background-color: #f2f3f5;" />
                             </a>
                             <div class="product-label-group">
@@ -306,13 +306,13 @@
                         </figure>
                         <div class="product-details">
                             <div class="product-cat">
-                                <a href="shop-grid-3cols.html">Clothing</a>
+                                <a href="shop-grid-3cols.html">@product.Category.Name</a>
                             </div>
                             <h3 class="product-name">
-                                <a href="product.html">Solid pattern in fashion summer dress</a>
+                                <a href="product.html">@product.Name</a>
                             </h3>
                             <div class="product-price">
-                                <span class="price">$140.00</span>
+                                <span class="price">$@product.Price</span>
                             </div>
                             <div class="ratings-container">
                                 <div class="ratings-full">
@@ -355,195 +355,45 @@
                             }
                         }
                     }">
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="~/assets/images/demos/demo1/products/product5.jpg" alt="Blue Pinafore Denim Dress"
-                                 width="220" height="245" style="background-color: #f2f3f5;" />
-                        </a>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                               data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                <i class="d-icon-heart"></i>
+                @foreach (var product in Model.Products)
+                {
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a href="product.html">
+                                <img src="~/assets/images/shop/@Model.ProductImages.ToList().FirstOrDefault(i => i.ProductId == product.Id).Image" alt="Blue Pinafore Denim Dress"
+                                     width="220" height="245" style="background-color: #f2f3f5;" />
                             </a>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <a href="shop-grid-3cols.html">Watches</a>
-                        </div>
-                        <h3 class="product-name">
-                            <a href="product.html">Fashion Electric Wrist Watch</a>
-                        </h3>
-                        <div class="product-price">
-                            <span class="price">$270.99</span>
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width:40%"></span>
-                                <span class="tooltiptext tooltip-top"></span>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                   data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                    <i class="d-icon-heart"></i>
+                                </a>
                             </div>
-                            <a href="product.html" class="rating-reviews">( 15 reviews )</a>
+                            <div class="product-action">
+                                <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+                            </div>
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a href="shop-grid-3cols.html">@product.Category.Name</a>
+                            </div>
+                            <h3 class="product-name">
+                                <a href="product.html">@product.Name</a>
+                            </h3>
+                            <div class="product-price">
+                                <span class="price">$@product.Price</span>
+                            </div>
+                            <div class="ratings-container">
+                                <div class="ratings-full">
+                                    <span class="ratings" style="width:40%"></span>
+                                    <span class="tooltiptext tooltip-top"></span>
+                                </div>
+                                <a href="product.html" class="rating-reviews">( 15 reviews )</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="~/assets/images/demos/demo1/products/product6.jpg" alt="Blue Pinafore Denim Dress"
-                                 width="220" height="245" style="background-color: #f2f3f5;" />
-                        </a>
-                        <div class="product-label-group">
-                            <label class="product-label label-new">New</label>
-                        </div>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                               data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                <i class="d-icon-heart"></i>
-                            </a>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <a href="shop-grid-3cols.html">Women</a>
-                        </div>
-                        <h3 class="product-name">
-                            <a href="product.html">Hempen Hood a Mourner</a>
-                        </h3>
-                        <div class="product-price">
-                            <span class="price">$12.83</span>
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width:20%"></span>
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <a href="product.html" class="rating-reviews">( 3 reviews )</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="~/assets/images/demos/demo1/products/product7.jpg" alt="Blue Pinafore Denim Dress"
-                                 width="220" height="245" style="background-color: #f2f3f5;" />
-                        </a>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                               data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                <i class="d-icon-heart"></i>
-                            </a>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <a href="shop-grid-3cols.html">Women</a>
-                        </div>
-                        <h3 class="product-name">
-                            <a href="product.html">Women Beautiful Headgear</a>
-                        </h3>
-                        <div class="product-price">
-                            <span class="price">$78.24</span>
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width:40%"></span>
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <a href="product.html" class="rating-reviews">( 8 reviews )</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="~/assets/images/demos/demo1/products/product8.jpg" alt="Blue Pinafore Denim Dress"
-                                 width="220" height="245" style="background-color: #f2f3f5;" />
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-new">New</span>
-                        </div>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                               data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                <i class="d-icon-heart"></i>
-                            </a>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <a href="shop-grid-3cols.html">Shoes</a>
-                        </div>
-                        <h3 class="product-name">
-                            <a href="product.html">Converse Training Shoes</a>
-                        </h3>
-                        <div class="product-price">
-                            <span class="price">$113.00</span>
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width:80%"></span>
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <a href="product.html" class="rating-reviews">( 11 reviews )</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="~/assets/images/demos/demo1/products/product9.jpg" alt="Blue Pinafore Denim Dress"
-                                 width="220" height="245" style="background-color: #f2f3f5;" />
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">27% Off</span>
-                        </div>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                               data-target="#addCartModal" title="Add to cart"><i class="d-icon-bag"></i></a>
-                            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                <i class="d-icon-heart"></i>
-                            </a>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                        </div>
-                    </figure>
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <a href="shop-grid-3cols.html">Bags & Backpacks</a>
-                        </div>
-                        <h3 class="product-name">
-                            <a href="product.html">Women's Fashion Handbag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">$53.99</ins><del class="old-price">$67.99</del>
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings-full">
-                                <span class="ratings" style="width:60%"></span>
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <a href="product.html" class="rating-reviews">( 16 reviews )</a>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </section>
 

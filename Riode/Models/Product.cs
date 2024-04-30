@@ -20,4 +20,5 @@ public class Product
     public string Material { get; set; }
     public string Features { get; set; }
     public string? RecommendedUse { get; set; }
+    public ICollection<Review>? Reviews { get; set; }
 }

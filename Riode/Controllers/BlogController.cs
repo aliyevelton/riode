@@ -26,27 +26,26 @@ public class BlogController : Controller
     {
         var blog = await _context.Blogs
             .Where(b => !b.isDeleted)
-            .Include(b => b.BlogTopic)
+            .Include(b => b.BlogTopics)
             .ThenInclude(b => b.Topic)
             .FirstOrDefaultAsync(b => b.Id == id);
 
-        var topics = blog.BlogTopic
+        var topics = blog.BlogTopics
             .Select(t => t.Topic)
             .Select(t => t.Name)
             .ToArray();
 
         var blogList = await _context.Blogs
         .Where(b => !b.isDeleted)
-        .Include(b => b.BlogTopic)
+        .Include(b => b.BlogTopics)
         .ThenInclude(b => b.Topic)
-        .Where(b => b.Id != id && b.Topic.Any(t => topics.Contains(t.Name)))
+        .Where(b => b.Id != id && b.BlogTopics.Any(t => t.Topic.Name.Contains(t.Topic.Name)))
         .ToListAsync();
 
         BlogViewModel model = new()
         {
             Blogs = blogList,
             Blog = blog
-
         };
 
 

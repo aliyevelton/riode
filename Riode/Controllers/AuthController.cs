@@ -57,6 +57,12 @@ public class AuthController : Controller
             return View();
         }
 
+        if (!user.IsActive)
+        {
+			ModelState.AddModelError("", "Your account is not active");
+			return View();
+		}
+
         var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, loginViewModel.Password, loginViewModel.RememberMe, true);
         if (signInResult.IsLockedOut)
         {
